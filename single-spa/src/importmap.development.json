@@ -1,0 +1,13 @@
+
+{
+    "imports": {
+        "@lal/root-config": "http//localhost:9000/lal-root-config.js",
+        "@lal/react-single": "http//localhost:8500/lal-react-single.js",
+        "@lal/react-multiples": "http//localhost:8600/lal-react-multiples.js",
+        "@lal/react-parcel": "http//localhost:8501/lal-react-parcel.js",
+        "@lal/react-route": "http//localhost:8500/lal-react-route.js",
+        "@lal/react-lazy": "http//localhost:8700/lal-react-lazy.js",
+        "@lal/react-header": "http//localhost:8800/lal-react-header.js",
+        "@lal/utils": "http//localhost:8600/lal-utils.js"
+    }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Root Config</title>
+  <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
+  <meta name="importmap-type" content="systemjs-importmap" />
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+        "react": "https://unpkg.com/react@18/umd/react.production.min.js",
+        "react-dom": "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      }
+    }
+  </script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
+
+  <% if (isLocal) { %>
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@lal/root-config": "//localhost:9000/lal-root-config.js",
+        "@lal/react-single": "//localhost:8500/lal-react-single.js",
+        "@lal/react-multiples": "//localhost:8600/lal-react-multiples.js",
+        "@lal/react-parcel": "//localhost:8501/lal-react-parcel.js",
+        "@lal/react-route": "//localhost:8100/lal-react-route.js",
+        "@lal/react-lazy": "//localhost:8700/lal-react-lazy.js",
+        "@lal/react-header": "//localhost:8800/lal-react-header.js",
+        "@lal/utils": "//localhost:8900/lal-utils.js"
+      }
+    }
+  </script><!-- onde vc vai importar as outras aplicações (rotas). O primeiro é o projeto raiz, que permiter ser um microfrontend, basicamente ele vai ser a configuração de tudo, nos outros é que vc vai desenvolver a aplicação. Eu posso apagar tudo ai e criar uma pasta com todos esses imports e ai dentro do script colocar no src a url q eu coloquei a pasta (importmap.development.json) na CDN. Mas ai pra rodar tem q publicar todos os micro tbm no CDN, antes de publicar roda o comando build e publica o que ta dentro do dist -->
+  <% } else { %>
+    <script type="systemjs-importmap" src="./importmap.production.json"></script><!-- se nao for local ele pega la na CDN a url do arquivo importmap.production.json q eu publiquei la. DEPOIS DE TUDO ISSO FEITO EU ENTRO NA PASTA SINGLE SPA E RODO serve -s dist -> ai ele roda tudo em outro localhost -->
+  <% } %>
+
+  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+  <% if (isLocal) { %>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+  <% } else { %>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+  <% } %>
+</head>
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <main></main>
+  <script>
+    System.import('@lal/root-config');
+  </script>
+  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>

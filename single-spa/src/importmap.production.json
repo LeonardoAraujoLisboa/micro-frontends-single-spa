@@ -1,0 +1,13 @@
+
+{
+    "imports": {
+        "@lal/root-config": "importo a url dos arquivos q eu publiquei no CDN de cada projeto quando eu buildei",
+        "@lal/react-single": "",
+        "@lal/react-multiples": "",
+        "@lal/react-parcel": "",
+        "@lal/react-route": "",
+        "@lal/react-lazy": "",
+        "@lal/react-header": "",
+        "@lal/utils": ""
+    }
+}
